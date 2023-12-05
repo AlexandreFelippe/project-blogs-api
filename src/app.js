@@ -1,7 +1,5 @@
 const express = require('express');
 
-// ...
-
 const app = express();
 
 // não remova ou mova esse endpoint
