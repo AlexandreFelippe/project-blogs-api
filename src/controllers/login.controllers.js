@@ -5,7 +5,7 @@ const secret = process.env.JWT_SECRET;
 
 const isBodyValid = (email, password) => email && password;
 
-module.exports = async (req, res) => {
+const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -31,3 +31,5 @@ module.exports = async (req, res) => {
     return res.status(500).json({ message: 'Erro interno', error: err.message });
   }
 };
+
+module.exports = { loginController };
