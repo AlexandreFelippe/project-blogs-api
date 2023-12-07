@@ -1,5 +1,11 @@
 const express = require('express');
-const { loginController, createUser, getUserById, createCategory } = require('./controllers');
+const {
+  loginController,
+  createUser,
+  getUserById,
+  createCategory,
+  listallCategories,
+} = require('./controllers');
 const { validateUserInput, checkExistingUser, validateToken } = require('./middlewares');
 const { listUsers } = require('./controllers/user.controllers');
 
@@ -21,6 +27,8 @@ app.get('/user', validateToken, listUsers);
 app.get('/user/:id', validateToken, getUserById);
 
 app.post('/categories', validateToken, createCategory);
+
+app.get('/categories', validateToken, listallCategories);
 
 // ...
 

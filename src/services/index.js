@@ -1,7 +1,8 @@
 const LoginService = require('./login.service');
-const { CreateCategory } = require('./category.service');
+const { CreateCategory, listCategories } = require('./category.service');
 
 module.exports = {
   LoginService,
   CreateCategory,
+  listCategories,
 };
