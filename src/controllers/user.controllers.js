@@ -16,23 +16,40 @@ const generateToken = (user) => jwt.sign(
   { expiresIn: '7d', algorithm: 'HS256' },
 );
 
-const handleUserCreationError = (res, error) => {
-  console.error(error);
-  res.status(500).json({ message: 'Internal Server Error' });
-};
-
 const createUser = async (req, res) => {
-  try {
-    const { displayName, email, password, image } = req.body;
+  const { displayName, email, password, image } = req.body;
 
-    const newUser = await User.create({ displayName, email, password, image });
+  const newUser = await User.create({ displayName, email, password, image });
 
-    const token = generateToken(newUser);
+  const token = generateToken(newUser);
 
-    res.status(201).json({ token });
-  } catch (err) {
-    handleUserCreationError(res, err);
-  }
+  res.status(201).json({ token });
 };
 
-module.exports = { createUser };
+const listUsers = async (req, res) => {
+  const users = await User.findAll({
+    attributes: ['id', 'displayName', 'email', 'image'],
+  });
+
+  res.status(200).json(users);
+};
+
+const getUserById = async (req, res) => {
+  const { id } = req.params;
+
+  const user = await User.findByPk(id, {
+    attributes: ['id', 'displayName', 'email', 'image'],
+  });
+
+  if (!user) {
+    return res.status(404).json({ message: 'User does not exist' });
+  }
+    
+  return res.status(200).json(user);
+};
+
+module.exports = {
+  createUser,
+  listUsers,
+  getUserById,
+};
