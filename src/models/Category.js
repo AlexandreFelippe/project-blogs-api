@@ -16,6 +16,15 @@ const Category = sequelize.define('Category', {
   tableName: 'categories',
 });
 
+Category.associate = (models) => {
+  models.Category.belongsToMany(models.BlogPost, {
+    through: 'PostCategory',
+    foreignKey: 'post_id',
+    otherKey: 'category_id',
+    as: 'categories',
+  });
+}
+
 return Category;
 
 };
