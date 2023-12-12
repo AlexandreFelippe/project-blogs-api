@@ -30,7 +30,7 @@ const User = sequelize.define('User', {
 
 User.associate = (models) => {
   User.hasMany(models.BlogPost,
-    { foreignKey: 'user_id', as: 'blogPosts' });
+    { foreignKey: 'user_id', as: 'blog_posts' });
 }
 
 return User;

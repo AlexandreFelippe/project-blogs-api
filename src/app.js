@@ -5,6 +5,7 @@ const {
   getUserById,
   createCategory,
   listallCategories,
+  postController,
 } = require('./controllers');
 const { validateUserInput, checkExistingUser, validateToken } = require('./middlewares');
 const { listUsers } = require('./controllers/user.controllers');
@@ -29,6 +30,8 @@ app.get('/user/:id', validateToken, getUserById);
 app.post('/categories', validateToken, createCategory);
 
 app.get('/categories', validateToken, listallCategories);
+
+app.post('/post', validateToken, postController);
 
 // ...
 

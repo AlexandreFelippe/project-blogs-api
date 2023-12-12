@@ -4,9 +4,8 @@ const PostCategory = sequelize.define('PostCategory', {
     type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
-    field: 'post_id',
   references: {
-    model: 'BlogPosts',
+    model: 'blog_posts',
     key: 'id',
   },
   onUpdate: 'CASCADE',
@@ -16,9 +15,8 @@ const PostCategory = sequelize.define('PostCategory', {
     type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
-    field: 'category_id',
   references: {
-    model: 'Categories',
+    model: 'categories',
     key: 'id',
   },
   onUpdate: 'CASCADE',
