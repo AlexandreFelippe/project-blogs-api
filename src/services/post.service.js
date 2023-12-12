@@ -12,8 +12,10 @@ const validateCategoryIds = async (categoryIds) => {
     where: { id: categoryIds },
   });
 
-  if (existingCategories !== categoryIds) {
-    return { status: 400, message: 'One or more "categoryIds" not found' };
+  if (existingCategories.length !== categoryIds.length) {
+    console.log(existingCategories);
+    console.log(categoryIds);
+    return { status: 400, message: 'one or more "categoryIds" not found' };
   }
   return null;
 };
@@ -45,7 +47,7 @@ const createPost = async ({ title, content, categoryIds, userId }) => {
   if (categoryIdsValidationError) {
     return categoryIdsValidationError;
   }
-
+  console.log('userId:', userId);
   const newPost = await createPostInDatabase(title, content, userId);
   await associateCategoriesToPost(newPost.id, categoryIds);
 
